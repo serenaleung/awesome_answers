@@ -19,9 +19,29 @@ Rails.application.routes.draw do
 
     post('/contact', { to: 'contact#create', as: 'contact_submit' })
 
+    # resources :contacts, only: [:new, :create]
 
-
-    # this will make the home page of the application go to WelcomeController with
-    # index action
+    resources :questions
+    # # new has to be before the show
+    # get('/questions/new', {to: 'questions#new', as: 'new_question'})
+    # post('/questions', {to: 'questions#create', as: 'questions'})
+    #
+    # # order of the URL matters because Rails gives higher priority for routes
+    # get('/questions/:id', {to: 'questions#show', as: 'question'})
+    # # note that we don't need to put `as:` option in here because we used the
+    # # same url for the `create` action. Indeed Rails will throw an error if you
+    # # try to resuse a predefined path helper. Remember that the `as:` option
+    # # defines a path/url helper which only generates a URL and isn't concerned
+    # # about the verb
+    # get('/questions', {to: 'questions#index'})
+    #
+    # get('/questions/:id/edit', {to: 'questions#edit', as: 'edit_question'})
+    #
+    # patch('/questions/:id', {to: 'questions#update'})
+    #
+    # #verb is delete,               action is destroy
+    # delete('/questions/:id', {to: 'questions#destroy'})
+    # # this will make the home page of the application go to WelcomeController with
+    # # index action
     root 'welcome#index'
 end
