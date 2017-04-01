@@ -6,19 +6,19 @@
     `authenticity_token` %>
 <%= form_tag contact_submit_path do %>
 
-  <div>
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
-  </div>
-  <div>
-    <%= label_tag :email %>
-    <%= email_field_tag :email %>
-  </div>
-  <div>
-    <%= label_tag :message %>
-    <%= text_area_tag :message %>
-  </div>
-
+<div class="input-group">
+  <%= label_tag :name %>
+  <%= text_field_tag :name, nil, class: 'form-control' %>
+</div>
+<div class="input-group">
+  <%= label_tag :email %>
+  <%= email_field_tag :email, nil, class: 'form-control'%>
+<div>
+<div class="input-group">
+  <%= label_tag :message %>
+  <%= text_area_tag :message, nil, class: 'form-control'%>
+</div>
+<br>
   <%# will generates a submit button for the form with label 'Contact Us' %>
-  <%= submit_tag "Contact Us" %>
+  <%= submit_tag "Contact Us", class: 'btn btn-primary' %>
 <% end %>

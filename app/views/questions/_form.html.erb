@@ -1,0 +1,29 @@
+<%# form_for is a built-in Rails helper that enables us to generate a form form
+    an ActiveRecrod model to submit to the associated controller. If you pass in
+    a non-persisted ActiveRecord object (not in the DB yet) then `form_for` will
+    automatically assume that this form will submit to the `create` action in
+    the associated controller (in our case questions#create) which has a path
+    helper of `questions_path` so we must have `questions_path` defined
+    If `@question` has values set to it already then the form will be
+    prepopulated with those values. %>
+
+
+<%# if you pass a pesisted ActiveRecord object to the `form_for` (in the DB)
+    then `form_for` will submit a `PATCH` request (instead of POST) using a
+    hidden_field technique and the URL for the form will be in the case the
+    `update` action url which is in our case question_path(@question) %>
+
+<%= @question.errors.full_messages.join(', ') %>
+<%= form_for @question do |f| %>
+    <div class="input-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, { class: 'form-control' } %>
+    </div>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
+<form>
