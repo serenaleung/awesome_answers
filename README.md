@@ -1,25 +1,9 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # awesome_answers
+
+* Setting up rails database with controllers & models
+* Added ability to input data, populate it, as well as edit and delete
+* Refactoring using one form to populate in multiple places and simplified code. Added flash messages and styled the pages.
+* One to many - added multiple answers to each question + subjects
+
+

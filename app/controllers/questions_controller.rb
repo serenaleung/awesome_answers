@@ -62,6 +62,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @answer = Answer.new
     # {"controller":"questions","action":"show","id":"4"}
     # if you take json out it'll render app/views/questions/show.html.erb
 

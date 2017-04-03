@@ -51,7 +51,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'cowsay', '~> 0.3'
 
-gem 'faker'
+gem 'faker', github: 'stympy/faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,6 +62,7 @@ group :development do
   gem 'interactive_editor'
    gem 'awesome_print'
    gem 'hirb'
+   gem 'rails-erd'
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
