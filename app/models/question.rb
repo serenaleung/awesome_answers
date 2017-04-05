@@ -8,6 +8,10 @@ class Question < ApplicationRecord
   # that the association must be present by default
   # to make it optional, gibe belongs_to a second argument `optional: true`
   belongs_to :subject, optional: true
+
+
+  belongs_to :user, optional:true
+
   # supposed to be answers but typo
 
   # has_many :answers adds the following instance methods

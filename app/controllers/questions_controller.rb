@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
   # the `before_action` method registers another method in this case it's the
   # `find_quesiton` method which will be executed just before the actions you
   # specify in the `only` array. Keep in mind that the method that gets executed
@@ -33,6 +34,8 @@ class QuestionsController < ApplicationController
      # the parameters that they want to allow the user to submit
     question_params = params.require(:question).permit([:title, :body])
     @question = Question.new question_params
+    @question.user = current_user
+
     if @question.save
       # redirct_to question_path({id: @question.id})
       # redirect_to question_path(@question.id)

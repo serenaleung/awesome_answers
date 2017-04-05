@@ -36,6 +36,15 @@ Rails.application.routes.draw do
       # argument or a question model
 
     end
+
+    resources :users, only: [:new, :create]
+    resources :sessions, only: [:new, :create] do
+      # when you define a route with `on:collection` option, it skips having an
+      # `:id` or `:session_id` as part of the generated URL
+      delete :destroy, on: :collection
+    end
+
+
     # # new has to be before the show
     # get('/questions/new', {to: 'questions#new', as: 'new_question'})
     # post('/questions', {to: 'questions#create', as: 'questions'})

@@ -1,5 +1,6 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
+<p>Created On: <%= standard_date_format(@question.created_at) %></p>
 <!-- <p><strong>Subject:</strong> <%= @question.subject.name if @question.subject %></p> -->
 <!-- if subject is nil don't run name -->
 <p><strong>Subject:</strong> <%= @question.subject&.name %></p>
