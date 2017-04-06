@@ -3,7 +3,14 @@
 # All the funcationalities we're going to be using in our Quesiton model come
 # from `ActiveRecord::Base` which leverages Ruby's meta programming features.
 class Question < ApplicationRecord
-  has_many :answers
+
+  # dependent: :destroy will delete all associated answers before deleting the
+  #                     question when you call `question.destroy`
+  # dependent: :nullify will update the `question_id` field to `null` in all the
+  #                     associated answers before deleting the question when you
+  #                     call `question.destroy`
+  # remember to always have a `dependent` option
+  has_many :answers, dependent: :destroy
   # as of Rails 5, belongs_to :subject will enforce a validation
   # that the association must be present by default
   # to make it optional, gibe belongs_to a second argument `optional: true`

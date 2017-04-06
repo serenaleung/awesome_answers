@@ -3,7 +3,9 @@
   <head>
     <title>Awesome Answers</title>
     <%= csrf_meta_tags %>
-
+    <%# the 2 lines below reference the manifest file or what the manifest
+        files generate for us. In dev environment, we'll see all the files
+        included individually. In production, those will be one file each %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -14,35 +16,45 @@
     <div class="container">
 
 
-    <!-- <a href='/'>Home</a> -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand " href="#">Aweseome Answers</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Home', root_path %></li>
+            <li><%= link_to 'About Us', about_path %></li>
+            <li><%= link_to 'Contact', contact_path %></li>
+            <li><%= link_to 'All Questions', questions_path %></li>
+            <% if session[:user_id].present? %>
+              <li><% current_user = User.find_by_id session[:user_id] %>
+              Hello <%= current_user.first_name %>,</li>
+              <li><%= link_to 'Sign Out', sessions_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'Sign Up', new_user_path %></li>
+              <li><%= link_to 'Sign In', new_session_path %></li>
+            <% end %>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
 
     <%# link_to is a built-in Rails view helper that generates an `<a>` tag
         the first argument is the anchor text and the second argument is the
         URL or Path. It's best to use Rails generated path/url helpers %>
-    <%= link_to 'Home', root_path %>
-    |
-    <%= link_to 'About Us', about_path %>
-    |
-    <%= link_to 'Contact', contact_path %>
-    |
-    <%= link_to 'All Questions', questions_path %>
-    |
-    <% if session[:user_id].present? %>
-      <% current_user = User.find_by_id session[:user_id] %>
-      Hello <%= current_user.first_name %>,
-      <%= link_to 'Sign Out', sessions_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Sign Up', new_user_path %>
-    |
-      <%= link_to 'Sign In', new_session_path %>
-    <% end %>
-    <hr>
+
+
       <% if flash[:notice] %>
+      <hr>
       <div class="flash-notice"><%= flash[:notice] %></div>
       <% elsif flash[:alert] %>
       <div class="flash-alert"><%= flash[:alert] %></div>
+      <hr>
       <% end %>
-    <hr>
+
     <%= yield %>
     </div>
   </body>

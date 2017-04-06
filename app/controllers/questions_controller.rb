@@ -79,6 +79,10 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    # can? is a helper method that came from CanCanCan which helps us enforce
+    # permission rules in the controllers and views
+
+    redirect_to root_path, alert: 'access denied' unless can? :edit, @question
     # @question = Question.find params[:id]
     # render plain: 'inside questions edit'
   end
@@ -92,7 +96,9 @@ class QuestionsController < ApplicationController
 
     # update it
     # if succeeds redirect to the show page
-    if @question.update(question_params)
+    if !(can? :edit, @question)
+      redirect_to root_path, alert: 'access denied'
+    elsif @question.update(question_params)
       redirect_to question_path(@question), notice: 'Question updated'
     else
     # if doesn't show the edit page
@@ -107,9 +113,12 @@ class QuestionsController < ApplicationController
 
     # local variable because only redirecting
     # only need instance variables if sharing with a template
-
-    @question.destroy
-    redirect_to questions_path, notice: 'Question deleted'
+    if can? :destroy, @question
+      @question.destroy
+      redirect_to questions_path, notice: 'Question deleted'
+    else
+      redirect_to root_path, alert: 'access denied'
+    end
     # render plain: 'in questions destroy'
   end
 

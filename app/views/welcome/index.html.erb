@@ -1,2 +1,15 @@
-<h1>Awesome Answers</h1>
-<%= link_to 'New Question', new_question_path %>
+<br/>
+<div class="well">
+  <h1>Awesome Answers</h1>
+  <%= link_to 'New Question', new_question_path, class: "newQ" %>
+
+  <!-- <img src="/cat.jpg" style='100%'> -->
+  <!-- <%= image_tag '/cat.jpg', style: 'width:30%' %> -->
+  <br/>
+  <br/>
+  <%#= this expects to have a file called cat2.jpg in the `public folder`  %>
+  <%#= image_tag '/cat2.jpg', style: 'width:30%' %>
+
+  <%#= expects file to be in assets folder %>
+  <%= image_tag 'cat2.jpg', style: 'width:30%' %>
+</div>
