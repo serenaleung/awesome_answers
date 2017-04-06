@@ -8,7 +8,6 @@
         included individually. In production, those will be one file each %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   </head>
 
@@ -18,9 +17,6 @@
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand " href="#">Aweseome Answers</a>
-          </div>
           <ul class="nav navbar-nav">
             <li><%= link_to 'Home', root_path %></li>
             <li><%= link_to 'About Us', about_path %></li>
@@ -49,9 +45,9 @@
 
       <% if flash[:notice] %>
       <hr>
-      <div class="flash-notice"><%= flash[:notice] %></div>
+      <div class="flash-notice alert alert-info alert-dismissable"><%= flash[:notice] %></div>
       <% elsif flash[:alert] %>
-      <div class="flash-alert"><%= flash[:alert] %></div>
+      <div class="flash-alert alert alert-info alert-dismissable"><%= flash[:alert] %></div>
       <hr>
       <% end %>
 
