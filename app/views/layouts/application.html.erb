@@ -24,8 +24,8 @@
             <li><%= link_to 'All Questions', questions_path %></li>
             <% if session[:user_id].present? %>
               <li><% current_user = User.find_by_id session[:user_id] %>
-              Hello <%= current_user.first_name %>,</li>
               <li><%= link_to 'Sign Out', sessions_path, method: :delete %></li>
+              <%= current_user.first_name %></li>
             <% else %>
               <li><%= link_to 'Sign Up', new_user_path %></li>
               <li><%= link_to 'Sign In', new_session_path %></li>
