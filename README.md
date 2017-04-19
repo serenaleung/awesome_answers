@@ -1,9 +1,12 @@
-# README
-# awesome_answers
+# Awesome Answers
 
-* Setting up rails database with controllers & models
-* Added ability to input data, populate it, as well as edit and delete
-* Refactoring using one form to populate in multiple places and simplified code. Added flash messages and styled the pages.
-* One to many - added multiple answers to each question + subjects
+Welcome to Awesome Answers project. This is a Rails project.
 
+## Setup
+Make sure you have postgres installed then run:
 
+```
+rails db:create
+```
+
+Duplicate `config/initializers/app_keys.rb.example` to `config/initializers/app_keys.rb` and put in real values for email SMTP server credentials. 
