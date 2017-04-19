@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+    match "/delayed_job" => DelayedJobWeb, :anchor => false, :via => [:get, :post]
 
     # When we receive a `GET` request with URL `/about`, then Rails will invoke
     # the `about_controller` with `index` action (action is just a method that is

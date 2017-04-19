@@ -37,6 +37,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
 
     if @question.save
+      RemindQuestionOwnerJob.set(wait: 5.days).perform_later(q.id)
       # redirct_to question_path({id: @question.id})
       # redirect_to question_path(@question.id)
 

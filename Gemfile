@@ -56,6 +56,9 @@ gem 'cowsay', '~> 0.3'
 gem 'faker', github: 'stympy/faker'
 gem 'cancancan', '~> 1.10'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'delayed_job_active_record'
+gem 'sinatra', '2.0.0.rc2'
+gem "delayed_job_web"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -68,6 +71,7 @@ group :development do
   gem 'awesome_print'
   gem 'hirb'
   gem 'rails-erd'
+
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'

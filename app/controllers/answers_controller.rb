@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
     # @answer = @question.answers.build(answer_params)
     if @answer.save
       #sending an email to the question's owner
-      AnswersMailer.notify_question_owner(@answer).deliver_now
+      AnswersMailer.notify_question_owner(@answer).deliver_later
       redirect_to question_path(@question), notice: 'Answer Created!'
     else
       # redirect_to question_path(@question), alert: "Couldn't Create Answer!"
