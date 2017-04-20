@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: awesome_answers_production
-  username: awesome_answers
-  password: <%= ENV['AWESOME_ANSWERS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
