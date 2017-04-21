@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     # resources :contacts, only: [:new, :create]
 
     resources :questions do
+      resources :likes, only: [:create, :destroy]
       resources :answers, only: [:create, :destroy]
 
       # Nesting resources :answers, only: [:create, :destrpy] in resources :questions
@@ -38,7 +39,12 @@ Rails.application.routes.draw do
 
     end
 
-    resources :users, only: [:new, :create]
+
+    resources :users, only: [:new, :create] do
+      resources :likes, only: [:index]
+    end
+
+
     resources :sessions, only: [:new, :create] do
       # when you define a route with `on:collection` option, it skips having an
       # `:id` or `:session_id` as part of the generated URL

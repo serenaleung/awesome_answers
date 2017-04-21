@@ -11,6 +11,9 @@ class Question < ApplicationRecord
   #                     call `question.destroy`
   # remember to always have a `dependent` option
   has_many :answers, dependent: :destroy
+
+  has_many :likes, dependent: :destroy
+  has_many :likers, through: :likes, source: :user
   # as of Rails 5, belongs_to :subject will enforce a validation
   # that the association must be present by default
   # to make it optional, gibe belongs_to a second argument `optional: true`
@@ -54,6 +57,16 @@ class Question < ApplicationRecord
 
   after_initialize :set_defaults
   before_validation :titleize_title
+
+  def liked_by?(user)
+    likes.exists?(user: user)
+  end
+
+  def like_for(user)
+    likes.find_by(user: user)
+  end
+
+
 
   private
 

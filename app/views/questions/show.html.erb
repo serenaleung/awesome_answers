@@ -5,6 +5,24 @@
 <!-- if subject is nil don't run name -->
 <p><strong>Subject:</strong> <%= @question.subject&.name %></p>
 
+<!-- <% like = @question.likes.find_by(user: current_user) %> -->
+
+<% if user_signed_in? && can?(:like, @question) %>
+  <% if @question.liked_by?(current_user) %>
+    <%= link_to fa_icon("heart"),
+    question_like_path(@question, @question.like_for(current_user)),
+    method: :delete
+    %>
+  <% else %>
+
+    <%= link_to fa_icon("heart-o"), question_likes_path(@question), method: :post %>
+  <% end %>
+<% end %>
+
+
+<!-- <span>(<%= @question.likes.count %>)</span> -->
+<span><%= pluralize(@question.likes.count, 'like') %></span>
+
 <% if can? :edit, @question %>
   <%= link_to 'Edit', edit_question_path(@question) %>
 
