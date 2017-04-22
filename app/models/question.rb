@@ -14,6 +14,12 @@ class Question < ApplicationRecord
 
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
+
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
   # as of Rails 5, belongs_to :subject will enforce a validation
   # that the association must be present by default
   # to make it optional, gibe belongs_to a second argument `optional: true`
@@ -66,6 +72,11 @@ class Question < ApplicationRecord
     likes.find_by(user: user)
   end
 
+
+  def votes_count
+    #do in 1 query
+    votes.where(is_up: true).count = votes.where(is_up: false).count
+  end
 
 
   private

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :questions do
       resources :likes, only: [:create, :destroy]
       resources :answers, only: [:create, :destroy]
+      resources :votes, only: [:create, :destroy, :update]
 
       # Nesting resources :answers, only: [:create, :destrpy] in resources :questions
       # will create the following routes:

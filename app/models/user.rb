@@ -5,6 +5,9 @@ class User < ApplicationRecord
                                       #table name   on the reference questions
   has_many :liked_questions, through: :likes, source: :question
 
+  has_many :votes, dependent: :destroy
+  has_many :voted_questions, through: :votes, source: :question
+
 # If you’re in the form and you have a custom field showing undefined attribute, can add in attribute accessor user.rb
 
 # If you add an attribute accessor to an ActiveRecord object then you will be able to capture that from the form and have it in memory but not stored in db if you don’t have a db field for it
