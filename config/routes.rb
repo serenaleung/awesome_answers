@@ -22,6 +22,16 @@ Rails.application.routes.draw do
 
     # resources :contacts, only: [:new, :create]
 
+namespace :api, defaults: { format: :json } do
+    	namespace :v1 do
+    		# /api/v1/questions.json # => INDEX
+          # /api/v1/questions/1.json # => SHOW
+    		resources :questions, only: [:index, :show, :create]
+    	end
+    end
+
+
+
     resources :questions do
       resources :likes, only: [:create, :destroy]
       resources :answers, only: [:create, :destroy]

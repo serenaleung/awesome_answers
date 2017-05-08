@@ -43,6 +43,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'active_model_serializers'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -60,7 +61,8 @@ gem 'delayed_job_active_record'
 gem 'sinatra', '2.0.0.rc2'
 gem "delayed_job_web"
 gem 'chosen-rails'
-
+gem 'rack-cors'
+gem 'simple_form'
 
 gem "font-awesome-rails"
 

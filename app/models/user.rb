@@ -48,6 +48,14 @@ class User < ApplicationRecord
 
   private
 
+  def generate_api_token
+     loop do
+       self.api_token = SecureRandom.urlsafe_base64(32)
+       break unless User.exists?(api_token: self.api_token)
+     end
+   end
+
+
   def downcase_email
     self.email.downcase! if email.present?
   end
