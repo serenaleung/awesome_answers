@@ -8,6 +8,8 @@
 
 <p>Tags: <%= @question.tags.map(&:name).join(', ') %></p>
 
+<%= image_tag @question.image.url(:large) if @question.image.present?%>
+
 <% if user_signed_in? && can?(:like, @question) %>
   <% if @question.liked_by?(current_user) %>
     <%= link_to(

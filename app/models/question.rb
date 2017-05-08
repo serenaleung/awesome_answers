@@ -31,6 +31,8 @@ class Question < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history, :finders]
 
+  mount_uploader :image, ImageUploader
+
   # supposed to be answers but typo
 
   # has_many :answers adds the following instance methods
