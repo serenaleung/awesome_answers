@@ -115,7 +115,7 @@ class QuestionsController < ApplicationController
     # if succeeds redirect to the show page
     if !(can? :edit, @question)
       redirect_to root_path, alert: 'access denied'
-    elsif @question.update(question_params)
+    elsif @question.update(question_params.merge({ slug: nil }))
       redirect_to question_path(@question), notice: 'Question updated'
     else
     # if doesn't show the edit page

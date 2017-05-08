@@ -28,6 +28,9 @@ class Question < ApplicationRecord
 
   belongs_to :user, optional:true
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history, :finders]
+
   # supposed to be answers but typo
 
   # has_many :answers adds the following instance methods
@@ -77,6 +80,12 @@ class Question < ApplicationRecord
     #do in 1 query
     votes.where(is_up: true).count = votes.where(is_up: false).count
   end
+
+  # Rails uses `to_param` method in ActiveRecord to know what to use for the
+  # URL, by default `to_param` methods will return the `id`
+  # def to_param
+  #  "#{id}-#{title}".parameterize
+  # end
 
 
   private

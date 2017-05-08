@@ -63,6 +63,7 @@ gem "delayed_job_web"
 gem 'chosen-rails'
 gem 'rack-cors'
 gem 'simple_form'
+gem 'friendly_id'
 
 gem "font-awesome-rails"
 
