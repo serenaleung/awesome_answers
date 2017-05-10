@@ -20,7 +20,7 @@ class Api::V1::QuestionsController < Api::BaseController
   end
 
   def create
-    question_params = params.require(:question).permit(:title, :body)
+    question_params = params.require
     # {questionLL {title: 'abd'. body: 'sdfsd'}}
     question = Question.new question_params
     question.user = @user

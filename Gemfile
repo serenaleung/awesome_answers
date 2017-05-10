@@ -66,6 +66,7 @@ gem 'simple_form'
 gem 'friendly_id'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'fog'
 
 gem "font-awesome-rails"
 

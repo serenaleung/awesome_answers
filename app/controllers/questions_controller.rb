@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
      # the line below is what's called "Strong Parameters" feautre that was added
      # to Rails starting with version 4 to help developer be more explicit about
      # the parameters that they want to allow the user to submit
-    question_params = params.require(:question).permit([:title, :body])
+    question_params = params.require(:question).permit([:title, :body, :image])
     @question = Question.new question_params
     @question.user = current_user
 
