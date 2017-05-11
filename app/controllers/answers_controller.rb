@@ -6,19 +6,25 @@ class AnswersController < ApplicationController
     @answer.question = @question
 
     # @answer = @question.answers.build(answer_params)
-    if @answer.save
-      #sending an email to the question's owner
-      AnswersMailer.notify_question_owner(@answer).deliver_later
-      redirect_to question_path(@question), notice: 'Answer Created!'
-    else
-      # redirect_to question_path(@question), alert: "Couldn't Create Answer!"
-      render '/questions/show'
+    respond_to do |format|
+      if @answer.save
+        # sending an email to the quesiton's owner
+        AnswersMailer.notify_question_owner(@answer).deliver_later
+        format.html { redirect_to question_path(@question), notice: 'Answer Created!' }
+        format.js   { render :success }
+      else
+        format.html { render '/questions/show' }
+        format.js   { render :failure }
+      end
     end
   end
 
   def destroy
-    answer = Answer.find(params[:id])
-    answer.destroy
-    redirect_to question_path(answer.question), notice: 'Answer deleted!'
+    @answer = Answer.find(params[:id])
+    @answer.destroy
+    respond_to do |format|
+      format.html { redirect_to question_path(@answer.question), notice: 'Answer deleted!' }
+      format.js   { render } # this will render `destroy.js.erb`
+    end
   end
 end

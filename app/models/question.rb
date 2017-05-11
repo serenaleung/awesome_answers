@@ -10,7 +10,7 @@ class Question < ApplicationRecord
   #                     associated answers before deleting the question when you
   #                     call `question.destroy`
   # remember to always have a `dependent` option
-  has_many :answers, dependent: :destroy
+  has_many :answers, lambda { order(created_at: :desc) }, dependent: :destroy
 
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
