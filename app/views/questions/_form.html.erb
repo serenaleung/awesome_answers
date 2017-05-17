@@ -20,6 +20,14 @@
   	<%= f.association :tags, input_html: { class: 'chosen-select',
                                            style: 'width: 400px' } %>
     <%= f.input :image %>
+
+    <% if !@question.persisted? && current_user.signed_in_with_twitter? %>
+    <div>
+      <%= f.check_box :tweet_this %>
+      <%= f.label :tweet_this %>
+    </div>
+    <% end %>
+
     <%= f.submit class: 'btn btn-primary'%>
     <!-- <div> -->
       <%#= f.label :title %>

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     # the `about_controller` with `index` action (action is just a method that is
     # defined within a controller)
     get('/about', { to: 'about#index' })
+    
+    get '/auth/twitter', as: :sign_in_with_twitter
+    get '/auth/:provider/callback' => 'callbacks#index'
+
     # get '/about', to: 'about#index'
 
     # you can also write it as:

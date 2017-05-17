@@ -32,11 +32,15 @@ class QuestionsController < ApplicationController
      # the line below is what's called "Strong Parameters" feautre that was added
      # to Rails starting with version 4 to help developer be more explicit about
      # the parameters that they want to allow the user to submit
-    question_params = params.require(:question).permit([:title, :body, :image])
     @question = Question.new question_params
     @question.user = current_user
 
     if @question.save
+
+      if @question.tweet_this
+        client.update @question.title
+      end
+
       RemindQuestionOwnerJob.set(wait: 5.days).perform_later(@question.id)
       # redirct_to question_path({id: @question.id})
       # redirect_to question_path(@question.id)
@@ -139,6 +143,8 @@ class QuestionsController < ApplicationController
     # render plain: 'in questions destroy'
   end
 
+  private
+
   def find_question
     @question = Question.find params[:id]
   end
@@ -147,7 +153,16 @@ class QuestionsController < ApplicationController
      # the line below is what's called "Strong Parameters" feautre that was added
      # to Rails starting with version 4 to help developer be more explicit about
      # the parameters that they want to allow the user to submit
-     params.require(:question).permit([:title, :body, {tag_ids: [] }, :image ])
+     params.require(:question).permit([:title, :body, {tag_ids: [] }, :image, :tweet_this ])
+  end
+
+  def client
+    ::Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV['TWITTER_API_KEY']
+      config.consumer_secret     = ENV['TWITTER_SECRET_KEY']
+      config.access_token        = current_user.oauth_token
+      config.access_token_secret = current_user.oauth_secret
+    end
   end
 
 end

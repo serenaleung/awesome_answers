@@ -35,6 +35,12 @@ class User < ApplicationRecord
     #    it will validate that the password matches the password_confirmation
     # 4. We will get a method called `authenticate` that will help us test if the
     #    user has entered the correct password or not.
+    validates :first_name, presence: true
+    validates :last_name, presence: true
+    validates :uid, uniqueness: { scope: :provider }
+
+
+
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -42,11 +48,44 @@ class User < ApplicationRecord
   validates :last_name, presence:true
   validates :email, presence:true,
                     uniqueness: { case_sensitive: false },
-                    format: VALID_EMAIL_REGEX
+                    format: VALID_EMAIL_REGEX,
+                    unless: :from_omniauth?
   before_validation :downcase_email
+
+  serialize :oauth_raw_data
+
+  def self.find_by_oauth(omniauth_data)
+    self.where(
+      uid: omniauth_data['uid'],
+      provider: omniauth_data['provider']
+    ).first
+  end
+
+  def self.create_from_omniauth(omniauth_data)
+    full_name = omniauth_data['info']['name'].split(/\s+/)
+    self.create(
+      uid: omniauth_data['uid'],
+      provider: omniauth_data['provider'],
+      first_name: full_name.first,
+      last_name: full_name.last,
+      oauth_token: omniauth_data['credentials']['token'],
+      oauth_secret: omniauth_data['credentials']['secret'],
+      oauth_raw_data: omniauth_data,
+      password: SecureRandom.hex(16)
+    )
+  end
+
+  def signed_in_with_twitter?
+      uid.present? && provider == 'twitter'
+  end
 
 
   private
+
+  def from_omniauth?
+    uid.present? && provider.present?
+  end
+
 
   def generate_api_token
      loop do
